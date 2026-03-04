@@ -2,7 +2,7 @@
 layout: post
 title: "Why I Started Writing"
 date: 2026-03-04
-image: /assets/images/writing.jpg
+image: /assets/images/writing.jpeg
 ---
 
 I decided to start this blog to clarify my thinking about:
