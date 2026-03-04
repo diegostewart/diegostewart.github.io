@@ -1,8 +1,8 @@
 ---
 layout: post
 title: "My second Post"
-date: 2026-03-01
-image: /assets/images/iamge.jpeg
+date: 2026-03-04
+image: /assets/images/image.jpeg
 ---
 
 After giving it a long thought I have come to the conclusión that the best way to shar knowledge is through writing:

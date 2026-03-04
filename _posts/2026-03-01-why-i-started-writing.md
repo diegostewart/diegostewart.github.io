@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Why I Started Writing"
-date: 2026-03-04
+date: 2026-03-01
 image: /assets/images/writing.jpeg
 ---
 
