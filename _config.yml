@@ -4,3 +4,5 @@ baseurl: ""
 url: "https://diego-stewart.github.io"
 markdown: kramdown
 permalink: /:title/
+paginate: 10          # posts per page
+paginate_path: "/page/:num/"
