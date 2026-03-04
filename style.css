@@ -3,14 +3,20 @@
 body {
   font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text",
                "Helvetica Neue", Helvetica, Arial, sans-serif;
-  max-width: 920px;
-  margin: 80px auto;
-  padding: 0 28px;
+  max-width: 720px;              /* narrower for reading comfort */
+  margin: 60px auto;             /* reduced top margin */
+  padding: 0 24px;
   background-color: #ffffff;
   color: #1d1d1f;
-  line-height: 1.65;
+  line-height: 1.6;
   -webkit-font-smoothing: antialiased;
 }
+
+/* flatten headings for a cleaner look */
+main h2, header h1 {
+  margin-top: 0;
+}
+
 
 /* -------- Header -------- */
 
@@ -36,18 +42,19 @@ nav {
 }
 
 nav a {
-  margin-right: 28px;
+  margin-right: 20px;
   text-decoration: none;
   font-size: 15px;
   font-weight: 500;
   color: #1d1d1f;
-  opacity: 0.7;
+  opacity: 0.8;
   transition: opacity 0.2s ease;
 }
 
 nav a:hover {
   opacity: 1;
 }
+
 
 /* -------- Blog List -------- */
 
@@ -59,17 +66,18 @@ nav a:hover {
 .post-row {
   display: flex;
   align-items: center;
-  gap: 48px;
-  padding: 40px 0;
+  gap: 32px;
+  padding: 32px 0;
   text-decoration: none;
   color: inherit;
-  border-bottom: 1px solid #f2f2f2;
+  border-bottom: 1px solid #e0e0e0;  /* softer divider */
   transition: opacity 0.2s ease;
 }
 
 .post-row:hover {
-  opacity: 0.75;
+  opacity: 0.85;
 }
+
 
 /* -------- Image -------- */
 
@@ -161,39 +169,39 @@ code {
   }
 }
 
-/* -------- Dark Mode (macOS-style) -------- */
+/* -------- Simplified dark mode -------- */
 
 @media (prefers-color-scheme: dark) {
   body {
-    background-color: #000000;
-    color: #f5f5f7;
+    background-color: #121212;  /* dark grey instead of pure black */
+    color: #e0e0e0;
   }
 
   nav a {
-    color: #f5f5f7;
+    color: #e0e0e0;
   }
 
   .post-row {
-    border-bottom: 1px solid #1c1c1e;
+    border-bottom: 1px solid #2a2a2a;
   }
 
   .post-excerpt {
-    color: #a1a1a6;
+    color: #b0b0b0;
   }
 
   .post-date {
-    color: #636366;
+    color: #888888;
   }
 
   pre {
-    background-color: #1c1c1e;
+    background-color: #1e1e1e;
   }
 
   code {
-    background-color: #2c2c2e;
+    background-color: #272727;
   }
 
   .post-image {
-    background-color: #1c1c1e;
+    background-color: #1e1e1e;
   }
 }
