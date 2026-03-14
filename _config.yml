@@ -5,5 +5,5 @@ url: "https://diego-stewart.github.io"
 markdown: kramdown
 permalink: /:title/
 plugins: [jekyll-paginate]
-paginate: 10          # posts per page
+paginate: 3          # posts per page
 paginate_path: "/page/:num/"
