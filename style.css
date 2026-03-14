@@ -33,7 +33,7 @@ main h2, header h1 {
 
 header {
   position: relative;
-  padding: 0.5rem 1rem 1rem;
+  padding: 0;
   margin-bottom: 6.25rem;
   display: flex;
   align-items: center;
@@ -44,6 +44,15 @@ header {
   color: white;
   padding: 1rem;
   width: 200px;
+}
+
+.header-right {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: black;
+  color: white;
+  padding: 1rem;
 }
 
 header h1 {
@@ -100,9 +109,9 @@ footer {
 .header-line {
   position: absolute;
   bottom: 0;
-  left: 200px;
+  left: 0;
   right: 0;
-  height: 1px;
+  height: 3px;
   background: black;
 }
 
