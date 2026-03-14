@@ -188,7 +188,7 @@ code {
 
 @media (min-width: 1200px) {
   .post-image {
-    flex: 0 0 20%;
+    flex: 0 0 10%;
   }
 
   .post-content h2 {
