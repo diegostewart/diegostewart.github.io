@@ -188,13 +188,13 @@ code {
   }
 
   .post-bottom {
-    flex-direction: column;
     align-items: flex-start;
     gap: 1.5rem;
   }
 
   .post-image {
-    width: 100%;
+    flex: 0 0 auto;  /* Ensure image doesn't stretch */
+    width: auto;
     height: 15rem;
     padding-bottom: 0;
   }
