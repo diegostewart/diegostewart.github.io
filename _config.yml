@@ -160,69 +160,36 @@ newsletter:
 # Markdown and syntax highlight
 markdown: kramdown
 highlighter: rouge
-kramdown:
-  input: GFM
-  syntax_highlighter_opts:
-    css_class: "highlight"
-    span:
-      line_numbers: false
-    block:
-      line_numbers: false
-      start_line: 1
+theme: minima
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
 
-# Includes & excludes
-include: ["_pages", "_scripts"]
+# Exclude from processing
 exclude:
-  - bin/
-  - CONTRIBUTING.md
-  - CUSTOMIZE.md
-  - Dockerfile
-  - docker-compose.yml
-  - docker-compose-slim.yml
-  - FAQ.md
   - Gemfile
   - Gemfile.lock
-  - INSTALL.md
-  - LICENSE
-  - lighthouse_results/
-  - package.json
-  - package-lock.json
-  - _pages/about_einstein.md
-  - purgecss.config.js
-  - README.md
-  - readme_preview/
-  - vendor
-keep_files:
-  - CNAME
-  - .nojekyll
+  - vendor/
 
-# Plug-ins
-plugins:
-  - jekyll-3rd-party-libraries
-  - jekyll-archives-v2
-  - jekyll-cache-bust
-  - jekyll-email-protect
-  - jekyll-feed
-  - jekyll-get-json
-  - jekyll-imagemagick
-  - jekyll-jupyter-notebook
-  - jekyll-link-attributes
-  - jekyll-minifier
-  - jekyll-paginate-v2
-  - jekyll-regex-replace
-  - jekyll/scholar
-  - jekyll-sitemap
-  - jekyll-socials
-  - jekyll-tabs
-  - jekyll-terser
-  - jekyll-toc
-  - jekyll-twitter-plugin
-  - jemoji
+# Include files
+include:
+  - _pages
 
-# Sitemap settings
+# Collections
+collections:
+  posts:
+    output: true
+
+# Defaults
 defaults:
   - scope:
-      path: "assets"
+      path: ""
+      type: "posts"
+    values:
+      layout: "default"
+  - scope:
+      path: ""
+      type: "pages"
     values:
       sitemap: false
 
