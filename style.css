@@ -90,7 +90,7 @@ nav a:hover {
 
 .post-bottom {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 2rem;
 }
 
@@ -130,6 +130,7 @@ nav a:hover {
   color: #6e6e73;
   margin-bottom: 0.75rem;
   max-width: 31.25rem;
+  text-align: left;
 }
 
 .read-more {
