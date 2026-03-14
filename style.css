@@ -93,7 +93,7 @@ nav a:hover {
 /* -------- Image -------- */
 
 .post-image {
-  flex: 0 0 15%;
+  flex: 0 0 5%;
   position: relative;
   padding-bottom: 25%; /* 2:1 aspect ratio for wider, less tall images */
   height: 0;
