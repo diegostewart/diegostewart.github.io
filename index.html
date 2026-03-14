@@ -1,43 +1,26 @@
----
-layout: default
-title: Home
----
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- TODO: Set the document title to the name of your application -->
+    <title>Lovable App</title>
+    <meta name="description" content="Lovable Generated Project" />
+    <meta name="author" content="Lovable" />
 
-<div class="post-list">
-  {% for post in paginator.posts %}
-    <a href="{{ post.url }}" class="post-row">
-      {% if post.image %}
-      <div class="post-image">
-        <img src="{{ post.image }}" alt="{{ post.title }}">
-      </div>
-      {% endif %}
-      <div class="post-content">
-        <div class="post-header">
-          <h2>{{ post.title }}</h2>
-          <p class="post-date">{{ post.date | date: "%B %d, %Y" }}</p>
-        </div>
-        <p class="post-excerpt">
-          {{ post.content | strip_html | truncate: 140 }} <span class="read-more">Read more</span>
-        </p>
-      </div>
-    </a>
-  {% endfor %}
-</div>
+    <!-- TODO: Update og:title to match your application name -->
+    <meta property="og:title" content="Lovable App" />
+    <meta property="og:description" content="Lovable Generated Project" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
 
-<div class="pagination">
-  {% if paginator.previous_page %}
-    <a href="{{ paginator.previous_page_path }}" class="prev">Previous</a>
-  {% endif %}
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@Lovable" />
+    <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+  </head>
 
-  {% for page in (1..paginator.total_pages) %}
-    {% if page == paginator.page %}
-      <span>{{ page }}</span>
-    {% else %}
-      <a href="{{ paginator.page_path(page) }}">{{ page }}</a>
-    {% endif %}
-  {% endfor %}
-
-  {% if paginator.next_page %}
-    <a href="{{ paginator.next_page_path }}" class="next">Next</a>
-  {% endif %}
-</div>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
