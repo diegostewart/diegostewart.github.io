@@ -13,7 +13,7 @@ title: Home
         <h2>{{ post.title }}</h2>
         <p class="post-date">{{ post.date | date: "%B %d, %Y" }}</p>
         <p class="post-excerpt">
-          {{ post.excerpt | strip_html | truncate: 140 }}
+          {{ post.content | strip_html | truncate: 140 }} <span class="read-more">Read more</span>
         </p>
       </div>
     </a>
