@@ -2,7 +2,7 @@
 # Site settings
 # -----------------------------------------------------------------------------
 
-title: Diego Stewart # the website title (if blank, full name will be used instead)
+title: My Website # the website title (if blank, full name will be used instead)
 first_name: Diego 
 middle_name: Matthew
 last_name: Stewart
@@ -153,6 +153,18 @@ newsletter:
 # Collections
 # -----------------------------------------------------------------------------
 
+collections:
+  books:
+    output: true
+  news:
+    defaults:
+      layout: post
+    output: true
+  projects:
+    output: true
+  teachings:
+    output: true
+
 # -----------------------------------------------------------------------------
 # Jekyll settings
 # -----------------------------------------------------------------------------
@@ -160,36 +172,69 @@ newsletter:
 # Markdown and syntax highlight
 markdown: kramdown
 highlighter: rouge
-theme: minima
-plugins:
-  - jekyll-feed
-  - jekyll-sitemap
+kramdown:
+  input: GFM
+  syntax_highlighter_opts:
+    css_class: "highlight"
+    span:
+      line_numbers: false
+    block:
+      line_numbers: false
+      start_line: 1
 
-# Exclude from processing
+# Includes & excludes
+include: ["_pages", "_scripts"]
 exclude:
+  - bin/
+  - CONTRIBUTING.md
+  - CUSTOMIZE.md
+  - Dockerfile
+  - docker-compose.yml
+  - docker-compose-slim.yml
+  - FAQ.md
   - Gemfile
   - Gemfile.lock
-  - vendor/
+  - INSTALL.md
+  - LICENSE
+  - lighthouse_results/
+  - package.json
+  - package-lock.json
+  - _pages/about_einstein.md
+  - purgecss.config.js
+  - README.md
+  - readme_preview/
+  - vendor
+keep_files:
+  - CNAME
+  - .nojekyll
 
-# Include files
-include:
-  - _pages
+# Plug-ins
+plugins:
+  - jekyll-3rd-party-libraries
+  - jekyll-archives-v2
+  - jekyll-cache-bust
+  - jekyll-email-protect
+  - jekyll-feed
+  - jekyll-get-json
+  - jekyll-imagemagick
+  - jekyll-jupyter-notebook
+  - jekyll-link-attributes
+  - jekyll-minifier
+  - jekyll-paginate-v2
+  - jekyll-regex-replace
+  - jekyll/scholar
+  - jekyll-sitemap
+  - jekyll-socials
+  - jekyll-tabs
+  - jekyll-terser
+  - jekyll-toc
+  - jekyll-twitter-plugin
+  - jemoji
 
-# Collections
-collections:
-  posts:
-    output: true
-
-# Defaults
+# Sitemap settings
 defaults:
   - scope:
-      path: ""
-      type: "posts"
-    values:
-      layout: "default"
-  - scope:
-      path: ""
-      type: "pages"
+      path: "assets"
     values:
       sitemap: false
 
@@ -357,14 +402,14 @@ enable_openpanel_analytics: false # enables Openpanel analytics (https://openpan
 enable_google_verification: false # enables google site verification
 enable_bing_verification: false # enables bing site verification
 enable_cookie_consent: false # enables GDPR-compliant cookie consent dialog (https://github.com/orestbida/cookieconsent)
-enable_masonry: false # enables automatic project cards arrangement
+enable_masonry: true # enables automatic project cards arrangement
 enable_math: true # enables math typesetting (uses MathJax)
 enable_tooltips: false # enables automatic tooltip links generated for each section titles on pages and posts
 enable_darkmode: true # enables switching between light/dark modes
 enable_navbar_social: false # enables displaying social links in the navbar on the about page
-enable_project_categories: false # enables categorization of projects into multiple categories
-enable_medium_zoom: false # enables image zoom feature (as on medium.com)
-enable_progressbar: false # enables a horizontal progress bar linked to the vertical scroll position
+enable_project_categories: true # enables categorization of projects into multiple categories
+enable_medium_zoom: true # enables image zoom feature (as on medium.com)
+enable_progressbar: true # enables a horizontal progress bar linked to the vertical scroll position
 enable_video_embedding: false # enables video embedding for bibtex entries. If false, the button opens the video link in a new window.
 
 # -----------------------------------------------------------------------------
