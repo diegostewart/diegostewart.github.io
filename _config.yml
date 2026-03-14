@@ -2,7 +2,7 @@
 # Site settings
 # -----------------------------------------------------------------------------
 
-title: My Website # the website title (if blank, full name will be used instead)
+title: Diego Stewart # the website title (if blank, full name will be used instead)
 first_name: Diego 
 middle_name: Matthew
 last_name: Stewart
@@ -152,18 +152,6 @@ newsletter:
 # -----------------------------------------------------------------------------
 # Collections
 # -----------------------------------------------------------------------------
-
-collections:
-  books:
-    output: true
-  news:
-    defaults:
-      layout: post
-    output: true
-  projects:
-    output: true
-  teachings:
-    output: true
 
 # -----------------------------------------------------------------------------
 # Jekyll settings
@@ -402,14 +390,14 @@ enable_openpanel_analytics: false # enables Openpanel analytics (https://openpan
 enable_google_verification: false # enables google site verification
 enable_bing_verification: false # enables bing site verification
 enable_cookie_consent: false # enables GDPR-compliant cookie consent dialog (https://github.com/orestbida/cookieconsent)
-enable_masonry: true # enables automatic project cards arrangement
+enable_masonry: false # enables automatic project cards arrangement
 enable_math: true # enables math typesetting (uses MathJax)
 enable_tooltips: false # enables automatic tooltip links generated for each section titles on pages and posts
 enable_darkmode: true # enables switching between light/dark modes
 enable_navbar_social: false # enables displaying social links in the navbar on the about page
-enable_project_categories: true # enables categorization of projects into multiple categories
-enable_medium_zoom: true # enables image zoom feature (as on medium.com)
-enable_progressbar: true # enables a horizontal progress bar linked to the vertical scroll position
+enable_project_categories: false # enables categorization of projects into multiple categories
+enable_medium_zoom: false # enables image zoom feature (as on medium.com)
+enable_progressbar: false # enables a horizontal progress bar linked to the vertical scroll position
 enable_video_embedding: false # enables video embedding for bibtex entries. If false, the button opens the video link in a new window.
 
 # -----------------------------------------------------------------------------
