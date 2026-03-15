@@ -4,6 +4,29 @@
 
 @use "variables" as v;
 
+// Font families
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+div,
+li,
+span,
+em,
+strong {
+  font-family: 'IBM Plex Sans', sans-serif;
+}
+
+code,
+pre,
+.highlight {
+  font-family: 'IBM Plex Mono', monospace;
+}
+
 p,
 h1,
 h2,
