@@ -1,0 +1,50 @@
+---
+import { Image } from 'astro:assets';
+import { formatDate, postUrl, readingMinutes, tagUrl, type Post } from '../lib/posts';
+
+interface Props {
+  posts: Post[];
+  /** Heading level for each post title, so the page outline stays in order. */
+  level?: 'h2' | 'h3';
+}
+
+const { posts, level = 'h3' } = Astro.props;
+const Heading = level;
+---
+
+<ol class="post-list">
+  {
+    posts.map((post) => (
+      <li class="post-card">
+        <div class="post-card__meta">
+          <time datetime={post.data.pubDate.toISOString()}>{formatDate(post.data.pubDate)}</time>
+          <span aria-hidden="true">·</span>
+          <span>{readingMinutes(post.body)} min read</span>
+          {post.data.draft && <span class="badge">Draft</span>}
+        </div>
+        <div class="post-card__body">
+          <Heading class="post-card__title">
+            <a href={postUrl(post)}>{post.data.title}</a>
+          </Heading>
+          <p class="post-card__desc">{post.data.description}</p>
+          {post.data.tags.length > 0 && (
+            <ul class="tags" aria-label="Tags">
+              {post.data.tags.map((tag) => (
+                <li>
+                  <a class="tag" href={tagUrl(tag)}>
+                    {tag}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+        {post.data.cover && (
+          <div class="post-card__cover">
+            <Image src={post.data.cover} alt="" widths={[320, 640]} sizes="(min-width: 1024px) 240px, 100vw" />
+          </div>
+        )}
+      </li>
+    ))
+  }
+</ol>

@@ -1,0 +1,30 @@
+---
+import Base from '../../layouts/Base.astro';
+import PostList from '../../components/PostList.astro';
+import { getPosts, getTags, url, type TagInfo } from '../../lib/posts';
+
+export async function getStaticPaths() {
+  const tags = getTags(await getPosts());
+  return tags.map((tag) => ({ params: { tag: tag.slug }, props: { tag } }));
+}
+
+interface Props {
+  tag: TagInfo;
+}
+
+const { tag } = Astro.props;
+const count = tag.posts.length;
+---
+
+<Base title={`Posts tagged “${tag.name}”`} description={`${count} ${count === 1 ? 'post' : 'posts'} tagged ${tag.name}, newest first.`} current="tags">
+  <section class="page-head">
+    <div class="wrap">
+      <p class="eyebrow"><a class="link" href={url('tags/')}>All tags</a></p>
+      <h1>Posts tagged “{tag.name}”</h1>
+      <p class="lead">{count} {count === 1 ? 'post' : 'posts'}, newest first.</p>
+    </div>
+  </section>
+  <div class="wrap page-body">
+    <PostList posts={tag.posts} level="h2" />
+  </div>
+</Base>
