@@ -16,15 +16,13 @@ const { tag } = Astro.props;
 const count = tag.posts.length;
 ---
 
-<Base title={`Posts tagged “${tag.name}”`} description={`${count} ${count === 1 ? 'post' : 'posts'} tagged ${tag.name}, newest first.`} current="tags">
-  <section class="page-head">
-    <div class="wrap">
-      <p class="eyebrow"><a class="link" href={url('tags/')}>All tags</a></p>
-      <h1>Posts tagged “{tag.name}”</h1>
-      <p class="lead">{count} {count === 1 ? 'post' : 'posts'}, newest first.</p>
-    </div>
-  </section>
-  <div class="wrap page-body">
+<Base title={`Posts tagged ${tag.name}`} description={`${count} ${count === 1 ? 'post' : 'posts'} tagged ${tag.name}, newest first.`} current="tags">
+  <header class="page-head container">
+    <a class="back" href={url('tags/')}>← All tags</a>
+    <h1 class="page-title">{tag.name}</h1>
+    <p class="page-lead">{count} {count === 1 ? 'post' : 'posts'}, newest first.</p>
+  </header>
+  <div class="container">
     <PostList posts={tag.posts} level="h2" />
   </div>
 </Base>

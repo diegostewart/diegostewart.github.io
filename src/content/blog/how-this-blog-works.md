@@ -2,7 +2,7 @@
 title: How this blog works
 description: Every post is a Markdown file. Push it to main and GitHub Actions builds the site with Astro and publishes it to GitHub Pages.
 pubDate: 2026-11-15
-tags: [astro, meta, github-pages]
+tags: [astro, github-pages, meta]
 draft: false
 ---
 
@@ -44,7 +44,35 @@ export async function getPosts() {
 }
 ```
 
-Inline code such as `npm run dev` gets a quieter treatment.
+It works for whatever a post needs. A SQL model:
+
+```sql
+-- Daily active users, deduplicated per day
+select
+  date_trunc('day', event_ts) as day,
+  count(distinct user_id)     as active_users
+from analytics.events
+where event_ts >= current_date - interval '30 days'
+group by 1
+order by 1;
+```
+
+Or a small Python step in a pipeline:
+
+```python
+import polars as pl
+
+def load_orders(path: str) -> pl.DataFrame:
+    return (
+        pl.scan_parquet(path)
+        .filter(pl.col("status") != "cancelled")
+        .with_columns(pl.col("amount").cast(pl.Decimal(12, 2)))
+        .collect()
+    )
+```
+
+Each block shows its language and has a Copy button. Inline code such as
+`npm run dev` gets a quieter treatment.
 
 ## Publishing
 

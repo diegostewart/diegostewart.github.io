@@ -1,0 +1,32 @@
+---
+import Base from '../layouts/Base.astro';
+import ProfileLinks from '../components/ProfileLinks.astro';
+import { SITE } from '../site.config';
+import { url } from '../lib/posts';
+
+/*
+ * About page. Edit the text below: add your experience, the stack you work
+ * with and what kind of roles you are interested in.
+ */
+---
+
+<Base title="About" description={`About ${SITE.author}, ${SITE.role}.`} current="about">
+  <header class="page-head container" data-enter>
+    <p class="kicker enter-up">About</p>
+    <h1 class="page-title enter-up">{SITE.author}</h1>
+    <p class="page-lead enter-up">{SITE.role}</p>
+  </header>
+  <div class="container">
+    <div class="prose">
+      <p>{SITE.intro}</p>
+      <p>
+        The <a href={url('blog/')}>writing</a> here covers the technical side of my work: how data pipelines and
+        platforms are built and run, what worked, what did not, and why. Posts are grouped by <a href={url('tags/')}>tag</a>
+        and available as an <a href={url('rss.xml')}>RSS feed</a>.
+      </p>
+      <h2>Get in touch</h2>
+      <p>The quickest way to reach me is through one of these:</p>
+    </div>
+    <div class="about__links"><ProfileLinks /></div>
+  </div>
+</Base>

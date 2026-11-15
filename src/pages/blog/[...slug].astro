@@ -2,6 +2,8 @@
 import { Image } from 'astro:assets';
 import { render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
+import ProfileLinks from '../../components/ProfileLinks.astro';
+import { SITE } from '../../site.config';
 import { formatDate, getPosts, postUrl, readingMinutes, tagUrl, url, type Post } from '../../lib/posts';
 
 export async function getStaticPaths() {
@@ -24,64 +26,66 @@ const { title, description, pubDate, updatedDate, tags, cover, coverAlt, draft }
 ---
 
 <Base title={title} description={description} type="article" image={cover?.src} publishedTime={pubDate} current="blog">
-  <article class="post">
-    <header class="post__head wrap" data-enter>
+  <article class="post container">
+    <header class="post__head" data-enter>
+      <a class="back enter-up" href={url('blog/')}>← Writing</a>
+      <h1 class="post__title enter-up">{title}</h1>
+      <p class="post__lead enter-up">{description}</p>
       <p class="post__meta enter-up">
-        <a class="link" href={url('blog/')}>All posts</a>
-        <span aria-hidden="true">/</span>
         <time datetime={pubDate.toISOString()}>{formatDate(pubDate)}</time>
         <span aria-hidden="true">·</span>
         <span>{readingMinutes(post.body)} min read</span>
+        {updatedDate && (
+          <>
+            <span aria-hidden="true">·</span>
+            <span>Updated <time datetime={updatedDate.toISOString()}>{formatDate(updatedDate)}</time></span>
+          </>
+        )}
         {draft && <span class="badge">Draft</span>}
       </p>
-      <h1 class="post__title">{title}</h1>
-      <p class="lead enter-up">{description}</p>
-      {updatedDate && (
-        <p class="post__updated enter-up">
-          Updated <time datetime={updatedDate.toISOString()}>{formatDate(updatedDate)}</time>
-        </p>
+      {tags.length > 0 && (
+        <ul class="tag-list enter-up" aria-label="Tags">
+          {tags.map((tag) => (
+            <li><a class="tag" href={tagUrl(tag)}>{tag}</a></li>
+          ))}
+        </ul>
       )}
     </header>
 
     {
       cover && (
-        <figure class="post__cover wrap enter-media">
-          <Image src={cover} alt={coverAlt ?? ''} widths={[640, 1024, 1600]} sizes="(min-width: 1200px) 1120px, 100vw" loading="eager" />
+        <figure class="post__cover">
+          <Image src={cover} alt={coverAlt ?? ''} widths={[640, 960, 1440]} sizes="(min-width: 760px) 712px, 100vw" loading="eager" />
         </figure>
       )
     }
 
-    <div class="prose wrap">
+    <div class="prose">
       <Content />
     </div>
 
-    <footer class="post__foot wrap">
-      {
-        tags.length > 0 && (
-          <div class="post__tags">
-            <h2 class="post__foot-heading">Tags</h2>
-            <ul class="tags">
-              {tags.map((tag) => (
-                <li>
-                  <a class="tag" href={tagUrl(tag)}>{tag}</a>
-                </li>
-              ))}
-            </ul>
-          </div>
-        )
-      }
+    <footer class="post__foot">
+      <div class="author">
+        <span class="author__mark" aria-hidden="true">{SITE.author.split(/\s+/).map((w) => w[0]).join('').slice(0, 2).toUpperCase()}</span>
+        <div>
+          <p class="author__name">{SITE.author}</p>
+          <p class="author__role">{SITE.role}. <a class="link" href={url('about/')}>About me</a></p>
+        </div>
+        <ProfileLinks />
+      </div>
+
       {
         (newer || older) && (
           <nav class="pager" aria-label="More posts">
             {older ? (
-              <a class="pager__link card" href={postUrl(older)}>
-                <span class="pager__dir">Older post</span>
+              <a class="pager__link" href={postUrl(older)}>
+                <span class="pager__dir">← Older</span>
                 <span class="pager__title">{older.data.title}</span>
               </a>
             ) : <span />}
             {newer && (
-              <a class="pager__link pager__link--next card" href={postUrl(newer)}>
-                <span class="pager__dir">Newer post</span>
+              <a class="pager__link pager__link--next" href={postUrl(newer)}>
+                <span class="pager__dir">Newer →</span>
                 <span class="pager__title">{newer.data.title}</span>
               </a>
             )}
@@ -90,4 +94,36 @@ const { title, description, pubDate, updatedDate, tags, cover, coverAlt, draft }
       }
     </footer>
   </article>
+
+  <script>
+    // Adds a language label and a Copy button to every code block.
+    for (const pre of document.querySelectorAll<HTMLPreElement>('.prose pre.astro-code')) {
+      const wrap = document.createElement('div');
+      wrap.className = 'code';
+      pre.replaceWith(wrap);
+
+      const bar = document.createElement('div');
+      bar.className = 'code__bar';
+      const lang = document.createElement('span');
+      lang.className = 'code__lang';
+      lang.textContent = pre.dataset.language && pre.dataset.language !== 'plaintext' ? pre.dataset.language : 'text';
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'code__copy';
+      button.textContent = 'Copy';
+      button.setAttribute('aria-label', `Copy ${lang.textContent} code`);
+      button.addEventListener('click', async () => {
+        try {
+          await navigator.clipboard.writeText(pre.innerText);
+          button.textContent = 'Copied';
+        } catch {
+          button.textContent = 'Press Ctrl+C';
+        }
+        setTimeout(() => (button.textContent = 'Copy'), 1800);
+      });
+
+      bar.append(lang, button);
+      wrap.append(bar, pre);
+    }
+  </script>
 </Base>

@@ -1,77 +1,51 @@
 ---
 import Base from '../layouts/Base.astro';
 import PostList from '../components/PostList.astro';
+import ProfileLinks from '../components/ProfileLinks.astro';
 import { SITE } from '../site.config';
-import { formatDate, getPosts, getTags, postUrl, readingMinutes, url } from '../lib/posts';
+import { getPosts, getTags, url } from '../lib/posts';
 
 const posts = await getPosts();
-const latest = posts[0];
 const recent = posts.slice(0, SITE.recentCount);
-const tags = getTags(posts).slice(0, 8);
+const tags = getTags(posts).slice(0, 12);
 ---
 
 <Base>
-  <section class="hero" data-enter aria-labelledby="hero-h">
-    <div class="wrap hero__grid">
-      <div class="hero__text">
-        <h1 id="hero-h" class="hero__title">
-          <span class="line"><span>Notes and essays</span></span>
-          <span class="line"><span>by {SITE.author}</span></span>
-        </h1>
-        <p class="lead enter-up">{SITE.intro}</p>
-        <div class="btn-row enter-up">
-          {latest && <a class="btn btn--primary" href={postUrl(latest)}>Read the latest post <svg class="arrow" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5" /></svg></a>}
-          <a class="btn btn--secondary" href={url('rss.xml')}>Subscribe by RSS</a>
-        </div>
-        <p class="hero__fact enter-up">
-          {posts.length} {posts.length === 1 ? 'post' : 'posts'}
-          {latest && <>, the latest on <time datetime={latest.data.pubDate.toISOString()}>{formatDate(latest.data.pubDate)}</time></>}
-        </p>
-      </div>
-
-      {
-        latest && (
-          <a class="feature card enter-media" href={postUrl(latest)} aria-labelledby="feature-title">
-            <span class="feature__label">Latest post</span>
-            <span id="feature-title" class="feature__title">{latest.data.title}</span>
-            <span class="feature__desc">{latest.data.description}</span>
-            <span class="feature__meta">
-              {formatDate(latest.data.pubDate)} · {readingMinutes(latest.body)} min read
-            </span>
-          </a>
-        )
-      }
+  <section class="intro container" data-enter aria-labelledby="intro-h">
+    <p class="kicker enter-up">{SITE.role}</p>
+    <h1 id="intro-h" class="intro__title enter-up">{SITE.author}</h1>
+    <p class="intro__lead enter-up">{SITE.intro}</p>
+    <div class="btn-row enter-up">
+      <a class="btn btn--primary" href={url('about/')}>About me</a>
+      <a class="btn btn--secondary" href={url('blog/')}>Read my writing</a>
     </div>
+    <div class="enter-up"><ProfileLinks /></div>
   </section>
 
-  <section class="section" aria-labelledby="recent-h">
-    <div class="wrap">
-      <div class="section__head">
-        <h2 id="recent-h">Recent posts</h2>
-        <a class="link" href={url('blog/')}>See all posts</a>
-      </div>
-      {recent.length > 0 ? <PostList posts={recent} /> : <p class="empty">No posts yet. Add a Markdown file to <code>src/content/blog/</code>.</p>}
+  <section class="block container" aria-labelledby="recent-h">
+    <div class="block__head">
+      <h2 id="recent-h" class="block__title">Recent writing</h2>
+      {posts.length > recent.length && <a class="more" href={url('blog/')}>All {posts.length} posts</a>}
     </div>
+    {recent.length > 0 ? <PostList posts={recent} /> : <p class="empty">No posts yet. Add a Markdown file to <code>src/content/blog/</code>.</p>}
   </section>
 
   {
     tags.length > 0 && (
-      <section class="section section--alt" aria-labelledby="topics-h">
-        <div class="wrap">
-          <div class="section__head">
-            <h2 id="topics-h">Posts by tag</h2>
-            <a class="link" href={url('tags/')}>See every tag</a>
-          </div>
-          <ul class="tag-cloud">
-            {tags.map((t) => (
-              <li>
-                <a class="tag tag--lg" href={url(`tags/${t.slug}/`)}>
-                  {t.name} <span class="tag__count">{t.posts.length}</span>
-                </a>
-              </li>
-            ))}
-          </ul>
+      <section class="block container" aria-labelledby="topics-h">
+        <div class="block__head">
+          <h2 id="topics-h" class="block__title">Topics</h2>
+          <a class="more" href={url('tags/')}>All tags</a>
         </div>
+        <ul class="tag-list">
+          {tags.map((t) => (
+            <li>
+              <a class="tag" href={url(`tags/${t.slug}/`)}>
+                {t.name}<span class="tag__count">{t.posts.length}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
       </section>
     )
   }

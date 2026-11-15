@@ -6,20 +6,19 @@ const tags = getTags(await getPosts());
 ---
 
 <Base title="Tags" description="Every tag used on this blog, with the number of posts under each." current="tags">
-  <section class="page-head">
-    <div class="wrap">
-      <h1>Tags</h1>
-      <p class="lead">{tags.length} {tags.length === 1 ? 'tag' : 'tags'}. Pick one to see its posts.</p>
-    </div>
-  </section>
-  <div class="wrap page-body">
+  <header class="page-head container">
+    <h1 class="page-title">Tags</h1>
+    <p class="page-lead">{tags.length} {tags.length === 1 ? 'tag' : 'tags'} across all posts.</p>
+  </header>
+  <div class="container">
     {
       tags.length > 0 ? (
-        <ul class="tag-cloud">
+        <ul class="tag-index">
           {tags.map((t) => (
             <li>
-              <a class="tag tag--lg" href={url(`tags/${t.slug}/`)}>
-                {t.name} <span class="tag__count">{t.posts.length}</span>
+              <a href={url(`tags/${t.slug}/`)}>
+                <span class="tag-index__name">{t.name}</span>
+                <span class="tag-index__count">{t.posts.length} {t.posts.length === 1 ? 'post' : 'posts'}</span>
               </a>
             </li>
           ))}

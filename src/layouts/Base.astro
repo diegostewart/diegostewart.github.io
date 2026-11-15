@@ -11,7 +11,7 @@ interface Props {
   image?: string;
   type?: 'website' | 'article';
   /** Which nav word to mark as the current page. */
-  current?: 'blog' | 'tags';
+  current?: 'blog' | 'tags' | 'about';
   publishedTime?: Date;
 }
 
@@ -24,10 +24,16 @@ const {
   publishedTime,
 } = Astro.props;
 
-const fullTitle = title ? `${title} · ${SITE.title}` : `${SITE.title}: personal blog`;
+const fullTitle = title ? `${title} · ${SITE.title}` : `${SITE.title}, ${SITE.role}`;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const ogImage = image ? new URL(image, Astro.site).href : undefined;
 const year = new Date().getFullYear();
+const initials = SITE.author.split(/\s+/).map((w) => w[0]).join('').slice(0, 2).toUpperCase();
+const nav = [
+  { key: 'blog', label: 'Writing', href: url('blog/') },
+  { key: 'tags', label: 'Tags', href: url('tags/') },
+  { key: 'about', label: 'About', href: url('about/') },
+] as const;
 ---
 
 <!doctype html>
@@ -37,25 +43,27 @@ const year = new Date().getFullYear();
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
+    <meta name="author" content={SITE.author} />
     <link rel="canonical" href={canonical} />
     <link rel="icon" type="image/svg+xml" href={url('favicon.svg')} />
     <link rel="alternate" type="application/rss+xml" title={`${SITE.title} RSS`} href={url('rss.xml')} />
     <meta name="generator" content={Astro.generator} />
 
-    <meta property="og:title" content={title ?? SITE.title} />
+    <meta property="og:title" content={title ?? `${SITE.title}, ${SITE.role}`} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content={type} />
     <meta property="og:url" content={canonical} />
+    <meta property="og:site_name" content={SITE.title} />
     {ogImage && <meta property="og:image" content={ogImage} />}
     <meta name="twitter:card" content={ogImage ? 'summary_large_image' : 'summary'} />
     {publishedTime && <meta property="article:published_time" content={publishedTime.toISOString()} />}
 
-    <meta name="theme-color" content="#edccbe" media="(prefers-color-scheme: light)" />
-    <meta name="theme-color" content="#351a2b" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#faf9f6" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#121418" media="(prefers-color-scheme: dark)" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400..700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400..500&family=Geist:wght@400..600&family=Geist+Mono:wght@400..500&display=swap" rel="stylesheet" />
 
     <!-- Set the colour scheme before first paint so the page never flashes the wrong one. -->
     <script is:inline>
@@ -68,16 +76,14 @@ const year = new Date().getFullYear();
   </head>
   <body>
     <header class="nav">
-      <div class="wrap nav__inner">
+      <div class="container nav__inner">
         <a class="skip-link" href="#top">Skip to content</a>
         <a class="nav__logo" href={url()} aria-label={`${SITE.title}, home`}>
-          <span class="mark" aria-hidden="true">D</span>
-          <span class="nav__name">{SITE.title}</span>
+          <span class="monogram" aria-hidden="true">{initials}</span>
+          <span>{SITE.title}</span>
         </a>
         <nav class="nav__links" aria-label="Main">
-          <a href={url('blog/')} aria-current={current === 'blog' ? 'page' : undefined}>Writing</a>
-          <a href={url('tags/')} aria-current={current === 'tags' ? 'page' : undefined}>Tags</a>
-          <a class="nav__rss" href={url('rss.xml')}>RSS</a>
+          {nav.map((item) => <a href={item.href} aria-current={current === item.key ? 'page' : undefined}>{item.label}</a>)}
           <button class="theme-toggle" type="button" aria-label="Switch to dark mode" data-theme-toggle>
             <svg class="theme-toggle__moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z" /></svg>
             <svg class="theme-toggle__sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4" /><path d="M12 2v2.5M12 19.5V22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M2 12h2.5M19.5 12H22M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8" /></svg>
@@ -91,15 +97,13 @@ const year = new Date().getFullYear();
     </main>
 
     <footer class="footer">
-      <div class="wrap footer__inner">
-        <a class="footer__name" href={url()}>{SITE.title}</a>
+      <div class="container footer__inner">
+        <p>© {year} {SITE.author} · {SITE.role}</p>
         <ul class="footer__links">
-          <li><a href={url('blog/')}>Writing</a></li>
-          <li><a href={url('tags/')}>Tags</a></li>
-          <li><a href={url('rss.xml')}>RSS feed</a></li>
-          <li><a href={SITE.links.github}>GitHub</a></li>
+          <li><a href={url('rss.xml')}>RSS</a></li>
+          {SITE.links.github && <li><a href={SITE.links.github}>GitHub</a></li>}
+          {SITE.links.linkedin && <li><a href={SITE.links.linkedin}>LinkedIn</a></li>}
         </ul>
-        <p class="footer__legal">© {year} {SITE.author}. Built with Astro, hosted on GitHub Pages.</p>
       </div>
     </footer>
 

@@ -66,6 +66,14 @@ export function formatDate(date: Date): string {
   return dateFormat.format(date);
 }
 
+const shortWithYear = new Intl.DateTimeFormat('en-GB', { day: '2-digit', month: 'short', year: 'numeric', timeZone: 'UTC' });
+const shortNoYear = new Intl.DateTimeFormat('en-GB', { day: '2-digit', month: 'short', timeZone: 'UTC' });
+
+/** "15 Nov 2026", or "15 Nov" without the year. */
+export function formatShortDate(date: Date, withYear = true): string {
+  return (withYear ? shortWithYear : shortNoYear).format(date);
+}
+
 /** Rough reading time at 220 words a minute, code blocks counted at half weight. */
 export function readingMinutes(body = ''): number {
   const code = body.match(/```[\s\S]*?```/g)?.join(' ') ?? '';

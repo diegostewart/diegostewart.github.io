@@ -13,19 +13,17 @@ for (const post of posts) {
 }
 ---
 
-<Base title="All posts" description={`Every post on this blog, newest first: ${posts.length} so far.`} current="blog">
-  <section class="page-head">
-    <div class="wrap">
-      <h1>All posts</h1>
-      <p class="lead">{posts.length} {posts.length === 1 ? 'post' : 'posts'}, newest first.</p>
-    </div>
-  </section>
-  <div class="wrap archive">
+<Base title="Writing" description={`All ${posts.length} posts by the author, newest first.`} current="blog">
+  <header class="page-head container">
+    <h1 class="page-title">Writing</h1>
+    <p class="page-lead">{posts.length} {posts.length === 1 ? 'post' : 'posts'}, newest first.</p>
+  </header>
+  <div class="container">
     {
       [...years].map(([year, list]) => (
-        <section class="archive__year" aria-labelledby={`y-${year}`}>
-          <h2 id={`y-${year}`} class="archive__heading">{year}</h2>
-          <PostList posts={list} />
+        <section class="year" aria-labelledby={`y-${year}`}>
+          <h2 id={`y-${year}`} class="year__title">{year}</h2>
+          <PostList posts={list} showYear={false} />
         </section>
       ))
     }

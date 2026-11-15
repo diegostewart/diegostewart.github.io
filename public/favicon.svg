@@ -1,1 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><rect width="32" height="32" rx="8" fill="#351a2b"/><path d="M10 8h5.6c5 0 8.4 3.2 8.4 8s-3.4 8-8.4 8H10V8Zm3.4 3v10h2.1c3 0 4.9-1.9 4.9-5s-1.9-5-4.9-5h-2.1Z" fill="#edccbe"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><circle cx="16" cy="16" r="16" fill="#23466f"/><text x="16" y="20.5" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="600" letter-spacing=".5" fill="#faf9f6">DS</text></svg>

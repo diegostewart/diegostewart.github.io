@@ -1,0 +1,25 @@
+---
+import { SITE } from '../site.config';
+import { url } from '../lib/posts';
+
+const { links } = SITE;
+const items = [
+  links.github && { label: 'GitHub', href: links.github },
+  links.linkedin && { label: 'LinkedIn', href: links.linkedin },
+  links.email && { label: 'Email', href: `mailto:${links.email}` },
+  { label: 'RSS', href: url('rss.xml') },
+].filter(Boolean) as { label: string; href: string }[];
+---
+
+<ul class="profile-links">
+  {
+    items.map((item) => (
+      <li>
+        <a href={item.href}>
+          {item.label}
+          <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M5 11 11 5M6 5h5v5" /></svg>
+        </a>
+      </li>
+    ))
+  }
+</ul>

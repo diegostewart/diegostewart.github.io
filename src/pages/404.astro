@@ -3,15 +3,10 @@ import Base from '../layouts/Base.astro';
 import { url } from '../lib/posts';
 ---
 
-<Base title="Page not found" description="This page does not exist. The list of every post is one link away.">
-  <section class="page-head">
-    <div class="wrap">
-      <h1>Page not found (404)</h1>
-      <p class="lead">The page may have moved or never existed.</p>
-      <div class="btn-row">
-        <a class="btn btn--primary" href={url('blog/')}>See all posts</a>
-        <a class="btn btn--secondary" href={url()}>Go to the homepage</a>
-      </div>
-    </div>
-  </section>
+<Base title="Page not found" description="This page does not exist. Every post is listed on the Writing page.">
+  <header class="page-head container">
+    <p class="kicker">404</p>
+    <h1 class="page-title">Page not found</h1>
+    <p class="page-lead">The page may have moved or never existed. Every post is listed on the <a class="link" href={url('blog/')}>Writing</a> page.</p>
+  </header>
 </Base>

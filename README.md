@@ -91,7 +91,8 @@ All internal links go through the `url()` helper in `src/lib/posts.ts`, so they 
 
 ## Customise
 
-- **Name, intro, links:** `src/site.config.ts`.
-- **Colours and fonts:** the tokens at the top of `src/styles/global.css` (light values on `:root`, dark values under the dark-mode blocks).
+- **Name, role, intro, profile links:** `src/site.config.ts`. Fill in `linkedin` and `email` there; empty values are hidden.
+- **About page:** `src/pages/about.astro`. Add your experience, stack and the roles you're interested in.
+- **Colours and fonts:** the tokens at the top of `src/styles/global.css` (light values on `:root`, dark values under the dark-mode blocks). Fonts are Geist and Geist Mono from Google Fonts.
 - **Code themes:** `markdown.shikiConfig.themes` in `astro.config.mjs` (any [Shiki theme](https://shiki.style/themes)).
 - **Favicon:** `public/favicon.svg`.

@@ -1,19 +1,28 @@
 /**
- * Site-wide text. Edit these to change the name, intro and links shown on
- * every page and in the RSS feed.
+ * Site-wide details. Edit these to change the name, role, intro and links
+ * shown on every page and in the RSS feed.
  */
 export const SITE = {
   title: 'Diego Stewart',
-  /** Used for the <meta name="description"> on the homepage and in RSS. */
-  description: 'Personal blog of Diego Stewart: notes and longer posts, newest first, with an RSS feed.',
-  /** Homepage intro under the heading. One or two sentences. */
-  intro:
-    'Notes and longer posts on what I am working on and what I learn along the way. Every post is a Markdown file in this site’s GitHub repository.',
   author: 'Diego Stewart',
-  /** How many posts the homepage lists under “Recent posts”. */
-  recentCount: 5,
+  role: 'Data Engineer',
+  /** Used for <meta name="description"> on the homepage and in RSS. */
+  description:
+    'Diego Stewart, Data Engineer. Technical posts on data pipelines, data platforms and the engineering work around them.',
+  /** Homepage intro under your name. One or two sentences. */
+  intro:
+    'I build data pipelines and the platforms they run on. This is where I write up what I learn on the job: designs, tools, mistakes and fixes.',
+  /** How many posts the homepage lists. */
+  recentCount: 6,
+  /**
+   * Profile links. Leave a value empty ('') to hide it.
+   * linkedin: 'https://www.linkedin.com/in/your-handle'
+   * email:    'you@example.com'
+   */
   links: {
     github: 'https://github.com/diegostewart',
+    linkedin: '',
+    email: '',
   },
   lang: 'en',
 } as const;
