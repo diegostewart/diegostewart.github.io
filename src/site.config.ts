@@ -21,8 +21,8 @@ export const SITE = {
    */
   links: {
     github: 'https://github.com/diegostewart',
-    linkedin: '',
-    email: '',
+    linkedin: 'https://www.linkedin.com/in/diego-stewart/',
+    email: 'diegostewartbalbas@gmail.com',
   },
   lang: 'en',
 } as const;
