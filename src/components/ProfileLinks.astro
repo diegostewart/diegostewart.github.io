@@ -1,13 +1,12 @@
 ---
 import { SITE } from '../site.config';
-import { url } from '../lib/posts';
 
 const { links } = SITE;
+// LinkedIn first. RSS lives only in the footer.
 const items = [
-  links.github && { label: 'GitHub', href: links.github },
   links.linkedin && { label: 'LinkedIn', href: links.linkedin },
+  links.github && { label: 'GitHub', href: links.github },
   links.email && { label: 'Email', href: `mailto:${links.email}` },
-  { label: 'RSS', href: url('rss.xml') },
 ].filter(Boolean) as { label: string; href: string }[];
 ---
 

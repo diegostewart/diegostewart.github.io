@@ -100,9 +100,9 @@ const nav = [
       <div class="container footer__inner">
         <p>© {year} {SITE.author} · {SITE.role}</p>
         <ul class="footer__links">
-          <li><a href={url('rss.xml')}>RSS</a></li>
-          {SITE.links.github && <li><a href={SITE.links.github}>GitHub</a></li>}
           {SITE.links.linkedin && <li><a href={SITE.links.linkedin}>LinkedIn</a></li>}
+          {SITE.links.github && <li><a href={SITE.links.github}>GitHub</a></li>}
+          <li><a href={url('rss.xml')} title="Feed for RSS readers">RSS</a></li>
         </ul>
       </div>
     </footer>
